@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Feedback App</title>
+</head>
+<body>
+    <h1>Resume Feedback Application</h1>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="job_description">Job Description:</label>
+            <textarea id="job_description" name="job_description" required></textarea>
+        </div>
+
+        <div>
+            <label for="resume">Upload Resume (PDF):</label>
+            <input type="file" id="resume" name="resume" accept="application/pdf" required />
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+    {% if error %}
+    <div style="color: red;">{{ error }}</div>
+    {% endif %}
+</body>
+</html>
