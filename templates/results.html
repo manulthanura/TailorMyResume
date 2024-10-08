@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Feedback Results</title>
+</head>
+<body>
+    <h1>Resume Feedback Results</h1>
+
+    <h2>Skill Matching:</h2>
+    <div>{{ skill_match | safe }}</div> <!-- Use 'safe' to render HTML -->
+
+    <h2>Resume Evaluation:</h2>
+    <div>{{ evaluation | safe }}</div> <!-- Use 'safe' to render HTML -->
+
+    <a href="/">Submit another resume</a>
+</body>
+</html>
