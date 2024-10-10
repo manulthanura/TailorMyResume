@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" >
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TailorMyResume</title>
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="static/css/vendor.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+
+</head>
+
+
+<body id="top">
+
+
+    <!-- preloader -->
+    <div id="preloader">
+        <div id="loader">
+        </div>
+    </div>
+
+
+    <!-- page wrap -->
+    <div id="page" class="s-pagewrap">
+
+
+    <!-- # site header -->
+    <header class="s-header">
+
+        <div class="row s-header__inner">
+
+            <div class="s-header__block">
+                <div class="s-header__logo">
+                    <a class="logo" href="/">
+                        <img src="static/images/logo.svg" alt="Homepage">
+                    </a>
+                </div>
+
+                <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
+            </div> <!-- end s-header__block -->
+
+            <nav class="s-header__nav">
+                <ul>
+                    <li class="current"><a href="#intro" class="smoothscroll">Intro</a></li>
+                    <li><a href="./#about" class="smoothscroll">About</a></li>
+                    <li><a href="https://www.instill.tech/" target="_blank">Instill AI</a></li>
+                    <li><a href="./#contribute" class="smoothscroll">Contribute</a></li>
+                </ul>
+            </nav>
+
+            <div class="s-header__cta">
+                <a href="./#check" class="btn btn--stroke s-header__cta-btn smoothscroll">Get Review</a>
+            </div>
+
+        </div> <!-- end s-header__inner -->
+
+    </header> 
+    <!-- end s-header -->
+    <section id="content" class="s-content">
+    <!-- # site-content -->
+    {% block content %} {% endblock %}
+    <!-- end s-content -->
+    </section>
+
+
+    <!-- # site-footer -->
+    <footer id="colophon" class="s-footer footer">
+
+        <div class="row s-footer__top">
+            <div class="column lg-12 text-center">
+                <h2 class="text-display-1">
+                    Sign Up to Our Newsletter.
+                </h2>
+                <p class="lead">
+                    Subscribe for updates, special offers and more.
+                </p>
+            </div>
+            <div class="column lg-12 s-footer__subscribe">
+                <div class="subscribe-form">
+                    <form id="mc-form" class="mc-form">
+                        <input type="email" name="EMAIL" id="mce-EMAIL" class="u-fullwidth text-center" placeholder="Your Email Address" title="The domain portion of the email address is invalid (the portion after the @)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$" required>
+                        <input type="submit" name="subscribe" value="Subscribe" class="btn btn--primary u-fullwidth">
+                        <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cdb7b577e41181934ed6a6a44_9a91cfe7b3" tabindex="-1" value=""></div> -->
+                        <div class="mc-status"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row s-footer__bottom">
+
+            <div class="column lg-12 stack-on-900 end">
+                <div class="ss-copyright text-center">
+                    <span>© TailorMyResume {{ now.year }}</span> 
+                    <span>Template by <a href="https://www.styleshout.com/" target="_blank">StyleShout</a> Project by <a href="https://manulthanura.com/" target="_blank">Manul</a></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ss-go-top">
+            <a class="smoothscroll" title="Back to Top" href="#top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M6 4h12v2H6zm5 10v6h2v-6h5l-6-6-6 6z"></path></svg>
+            </a>
+        </div> <!-- end ss-go-top -->
+
+    </footer> <!-- end footer -->
+
+
+    <!-- Java Script -->
+    <script src="static/js/plugins.js"></script>
+    <script src="static/js/main.js"></script>
+
+</body>
+</html>

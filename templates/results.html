@@ -1,19 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Feedback Results</title>
-</head>
-<body>
-    <h1>Resume Feedback Results</h1>
+{% extends 'base.html' %}
+{% block content %}
+    <!-- intro -->
+    <section id="intro" class="s-intro target-section">
 
-    <h2>Skill Matching:</h2>
-    <div>{{ skill_match | safe }}</div> <!-- Use 'safe' to render HTML -->
+        <div class="s-intro__bg"></div>
 
-    <h2>Resume Evaluation:</h2>
-    <div>{{ evaluation | safe }}</div> <!-- Use 'safe' to render HTML -->
+        <div class="row s-intro__content">
 
-    <a href="/">Submit another resume</a>
-</body>
-</html>
+            <div class="column lg-12">
+                <div class="text-center">
+                    <h4 style="color: white;">
+                        "If you believe it'll work out, you'll see opportunities. If you don't believe it'll work out, you'll see obstacles."<br><br>—Wayne Dyer</h4>
+                        <br>
+                </div>
+            </div> <!-- s-intro__content-inner -->
+
+        </div> <!-- s-intro__content -->
+
+    </section> <!-- end s-intro -->
+
+    <!-- about -->
+    <section class="s-about target-section">
+
+        <!-- stats -->
+        <div class="row block-lg-one-fourth block-tab-one-half block-stack s-about__stats">
+
+            <div class="column s-about__stats-item">
+                <div class="s-about__stats-count">{{ resume_rating }}<span>%</span></div>
+                <h5>Resume Rating</h5>
+            </div>
+            <div class="column s-about__stats-item">
+                <div class="s-about__stats-count">{{ total_skills }}<span>#</span></div>
+                <h5>Total Skills</h5>
+            </div>
+            <div class="column s-about__stats-item">
+                <div class="s-about__stats-count">{{ experience }}<span>yrs</span></div>
+                <h5>Experience</h5>
+            </div>
+            <div class="column s-about__stats-item">
+                <div class="s-about__stats-count">{{ rejection_probability }}<span>%</span></div>
+                <h5>Rejection probability</h5>
+            </div>
+
+        </div> <!-- end stats -->
+
+        <!-- skill_match -->
+        <div class="s-about__info">
+
+            <div class="row section-header" data-num="01">
+                <div class="column lg-6 stack-on-1000 title-block">
+                    <h2 class="title text-display-1">Skill Matching</h2>
+                </div>
+            </div>
+
+            <div class="row">
+            <div class="column lg-12 intro">
+                <div>{{ areas_meeting_requirements[0] }}</div>
+            </div>
+            </div>
+            <hr>
+
+        </div> <!-- end skill_match -->
+        
+        <!-- evaluation -->
+        <div class="s-about__howto">
+            <div class="row section-header" data-num="02">
+                <div class="column lg-12 title-block">
+                    <h2 class="title text-display-1">Resume Evaluation</h2>
+                </div>
+            </div>
+            <div class="row">
+            <div class="column lg-12 intro">
+                <div>{{ areas_for_improvement[0] }}</div>
+            </div>
+            </div>
+
+        </div> <!-- end evaluation -->
+
+        <div class="s-about__info">
+            <div class="row ">
+                <a class="btn btn--primary u-fullwidth" href="/">Submit another resume</a>
+            </div>
+        </div>
+
+    </section>
+    <!-- end s-about -->
+{% endblock %}
