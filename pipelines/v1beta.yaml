@@ -1,0 +1,83 @@
+version: v1beta
+component:
+  pdf-to-text:
+    type: document
+    task: TASK_CONVERT_TO_TEXT
+    input:
+      document: ${variable.resume_pdf_file}
+    error-handling:
+      retry: 3
+      fallback-message: "Error converting PDF to text. Please check the file format and layout."
+
+  clean-text:
+    type: openai
+    task: TASK_TEXT_GENERATION
+    input:
+      model: gpt-4o
+      prompt: |-
+        Please clean and standardize the following text by removing any special characters and non-alphabetic content:
+        --
+        ${pdf-to-text.output.body}
+        --
+      response-format:
+        type: text
+      system-message: You are an expert at processing and cleaning raw text data to make it suitable for further analysis.
+      top-p: 1
+
+  skill-matching:
+    type: openai
+    task: TASK_TEXT_GENERATION
+    input:
+      model: gpt-4o
+      prompt: |-
+        The following is a job description:
+        --
+        ${variable.job_description}
+        --
+        And this is the cleaned resume text:
+        --
+        ${clean-text.output.texts[0]}
+        --
+        Please identify and match key skills, qualifications, and experience between the resume and job description. Highlight areas where the candidate matches and areas where improvements can be made.
+      response-format:
+        type: text
+      system-message: You are a highly skilled HR specialist. Analyze the resume and provide a structured output on the match with the job description.
+      top-p: 1
+
+  evaluation:
+    type: openai
+    task: TASK_TEXT_GENERATION
+    input:
+      model: gpt-4o
+      prompt: |-
+        Based on the job description and the following resume content, please provide a detailed evaluation:
+        -- Cleaned Resume: ${clean-text.output.texts[0]}
+        -- Job Description: ${variable.job_description}
+        Provide:
+        1. A suitability score (0-100) based on the resume match with the job description.
+        2. Areas where the candidate meets the job requirements.
+        3. Areas where the candidate can improve.
+        Format your response as a structured output.
+      response-format:
+        type: text
+      system-message: You are a detailed and analytical HR expert reviewing candidate resumes.
+      top-p: 1
+
+variable:
+  resume_pdf_file:
+    title: Resume PDF file
+    instill-format: "*/*"
+  job_description:
+    title: Job Description
+    instill-format: string
+
+output:
+  resume_skill_match:
+    title: Skill Matching
+    value: ${skill-matching.output.texts[0]}
+    instill-ui-order: 1
+
+  resume_evaluation:
+    title: Resume Evaluation
+    value: ${evaluation.output.texts[0]}
+    instill-ui-order: 2
