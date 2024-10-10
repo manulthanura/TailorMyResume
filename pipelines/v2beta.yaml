@@ -1,0 +1,60 @@
+version: v2beta
+component:
+  pdf-to-text:
+    type: document
+    task: TASK_CONVERT_TO_TEXT
+    input:
+      document: ${variable.resume_pdf_file}
+    error-handling:
+      retry: 3
+      fallback-message: "Error converting PDF to text. Please check the file format and layout."
+
+  evaluation:
+    type: openai
+    task: TASK_TEXT_GENERATION
+    input:
+      model: gpt-4o-mini
+      prompt: |-
+        Please clean and standardize the following text by removing any special characters and non-alphabetic content:
+        --
+        ${pdf-to-text.output.body}
+        --
+        The following is a job description:
+        --
+        ${variable.job_description}
+        --
+        Please identify and match key skills, qualifications, and experience between the resume and job description. Highlight areas where the candidate matches and areas where improvements can be made. Based on the job description and the following resume content, please identify a detailed evaluation:
+
+        Provide:
+        1. Resume Rating - Output an integer [A suitability score (0-100) based on the resume match with the job description.]
+        2. Total Skills- Output an integer [Total technicall skills that candidate has]
+        3. Experience - Output an integer [Total number of years]
+        4. Rejection probability - Output an integer [A suitability score (0-100) based on the resume match with the job description.]
+        5. Areas Meeting Requirements - A summary as a paragraph that tells the areas where the candidate meets the job requirements.
+        6. Areas for Improvement - A summary as a paragraph that tells the areas where the candidate can improve.
+
+        Format your response as a structured JSON.
+
+      response-format:
+        type: json_object
+      system-message: |-
+        You are an expert at processing and cleaning raw text data to make it suitable for further analysis, a highly skilled HR specialist capable of analyzing resumes to provide structured feedback on their match with job descriptions, and a detailed, analytical HR expert in evaluating candidate profiles. You only speak in JSON. Do not generate output that isn’t in properly formatted JSON. Results always should be in the format:
+          {"Resume Rating": 0,"Total Skills": 0,"Experience": 0,"Rejection Probability": 0,"Areas Meeting Requirements":[],"Areas for Improvement":[]}. 
+        For Resume Rating, Total Skills, Experience, and Rejection Probability, the values are calculated based on the data in the resume. A suitability score (0-100) based on the resume match with the job description.
+      top-p: 1
+      temperature: 0.2
+      max-tokens: 800
+
+variable:
+  resume_pdf_file:
+    title: Resume PDF file
+    instill-format: "*/*"
+  job_description:
+    title: Job Description
+    instill-format: string
+
+output:
+  resume_evaluation:
+    title: Resume Evaluation
+    value: ${evaluation.output.texts[0]}
+    instill-ui-order: 1
