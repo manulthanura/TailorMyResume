@@ -40,11 +40,12 @@ Some resources to get started with Instill Cloud:
 - [Explore the Instill Cloud documentation](https://www.instill.tech/docs/welcome)
 - [Learn more about OpenAI's models](https://platform.openai.com/docs/models)
 
-## Getting Started
 
-Build and run the Docker image
-    
-```bash
-$ docker build -t tailormyresume_flask .
-$ docker run -it --rm --name my-running-app tailormyresume_flask
-```
+### Docker
+
+docker build -t tailormyresume:latest .
+docker run --name tailormyresume -p 5000:5000 tailormyresume:latest
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
